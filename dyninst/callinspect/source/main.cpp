@@ -36,39 +36,6 @@ BPatch_function* getPrintFuncion (BPatch_image* appImage)
     return printfFunc;
 }
 
-void instrumentMain(BPatch_process* app) {
-    BPatch_image* appImage = app->getImage();
-    
-    // Get `printf` function
-    BPatch_function* printfFunc = getPrintFuncion(appImage);
-    if (!printfFunc) return;
-    
-    // Find the `main` function
-    std::vector<BPatch_function*> mainFuncs;
-    appImage->findFunction("main", mainFuncs);
-    if (mainFuncs.empty()) {
-        cerr << "Main function not found" << endl;
-        return;
-    }
-    BPatch_function* mainFunc = mainFuncs.front();
-    
-    // Get entry points for `main`
-    std::vector<BPatch_point*>* entryPoints = mainFunc->findPoint(BPatch_entry);
-    if (!entryPoints || entryPoints->empty()) return;
-    
-    char printfFormat[256];
-    snprintf(printfFormat, sizeof(printfFormat), "Function called: main\n");
-    BPatch_constExpr formatExpr(printfFormat);
-    BPatch_Vector<BPatch_snippet*> printfArgs;
-    printfArgs.push_back(&formatExpr);
-    
-    BPatch_funcCallExpr printfCall(*printfFunc, printfArgs);
-    for (auto point : *entryPoints) {
-        app->insertSnippet(printfCall, *point);
-        cout << "Inserted trace for main function." << endl;
-    }
-}
-
 
 void instrumentFunctions (BPatch_process* app)
 {
@@ -96,10 +63,7 @@ void instrumentFunctions (BPatch_process* app)
         std::vector<BPatch_function*> functions;
         module->getProcedures(functions);
         for (auto func : functions) 
-        {
-            BPatch_module* module = func->getModule();
-            if (!module) continue;
-            
+        {          
             vector<BPatch_point*>* entryPoints = func->findPoint(BPatch_entry);
             if (entryPoints == nullptr || entryPoints->empty()) continue;
             
