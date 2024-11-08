@@ -13,6 +13,6 @@ def analsis_main(FuncList):
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print("Usage: python angr_binary_analysis.py path/to/binary")
+        print("Usage: python analysis.py [input]")
     else:
         analsis_main(sys.argv[1])
