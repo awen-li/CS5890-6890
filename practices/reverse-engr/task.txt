@@ -1,0 +1,6 @@
+Task 1: Figure out the password.
+
+Task 2: Bypass the password check without knowing the password.
+
+Task 3: Change "Access Denied" to "Try Again".
+
