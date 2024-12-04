@@ -1,0 +1,7 @@
+With the provided binary, finish the flowing three tasks by programming with angr:
+
+Task 1:Get Basic Information of the Binary
+
+Task 2:Get Information of a given function
+
+Task 3: Symbolic Execution to Find the Password
