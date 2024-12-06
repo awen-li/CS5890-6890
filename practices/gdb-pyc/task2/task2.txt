@@ -1,0 +1,20 @@
+python setup.py install
+    
+gdb python
+r task.py
+l
+b 36
+c
+info locals
+n
+info locals
+info b
+d  1
+r
+s
+l
+b 17
+c
+p allStudents[i].stuName
+n
+p stuName[0]
