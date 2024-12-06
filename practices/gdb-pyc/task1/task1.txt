@@ -1,0 +1,11 @@
+gdb python
+r task.py
+b print
+r
+l
+info locals
+info args
+disassemble
+n
+c
+ 
