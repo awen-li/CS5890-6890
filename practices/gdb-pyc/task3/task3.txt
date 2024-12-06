@@ -1,0 +1,11 @@
+python setup.py install
+    
+gdb python
+r task.py
+bt
+up
+up
+p stuName
+l
+p stuId
+
